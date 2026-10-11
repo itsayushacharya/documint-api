@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; padding: 40px; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; border-bottom: 2px solid #3b82f6; padding-bottom: 20px; }
+    .company-title { font-size: 28px; font-weight: 800; color: #1e293b; }
+    .invoice-title { font-size: 24px; color: #3b82f6; text-align: right; }
+    .meta-table { margin-top: 10px; font-size: 14px; text-align: right; }
+    .details { display: flex; justify-content: space-between; margin-bottom: 40px; font-size: 14px; }
+    .bill-to h4, .ship-to h4 { color: #64748b; font-size: 12px; text-transform: uppercase; margin-bottom: 6px; }
+    table.items { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+    table.items th { background: #f8fafc; color: #475569; text-align: left; padding: 12px; font-size: 13px; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; }
+    table.items td { padding: 12px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
+    .text-right { text-align: right; }
+    .summary { width: 300px; margin-left: auto; font-size: 14px; }
+    .summary-row { display: flex; justify-content: space-between; padding: 6px 0; }
+    .summary-row.total { font-weight: bold; font-size: 18px; color: #1e293b; border-top: 2px solid #e2e8f0; padding-top: 12px; }
+    .footer { margin-top: 60px; text-align: center; color: #94a3b8; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="company-title">{{companyName}}</div>
+      <p style="font-size: 13px; color: #64748b;">{{companyAddress}}</p>
+    </div>
+    <div>
+      <div class="invoice-title">INVOICE</div>
+      <table class="meta-table">
+        <tr><td><strong>Invoice #:</strong></td> <td>{{invoiceNumber}}</td></tr>
+        <tr><td><strong>Date:</strong></td> <td>{{date}}</td></tr>
+        <tr><td><strong>Due Date:</strong></td> <td>{{dueDate}}</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="details">
+    <div class="bill-to">
+      <h4>Billed To:</h4>
+      <p><strong>{{clientName}}</strong></p>
+      <p>{{clientEmail}}</p>
+    </div>
+  </div>
+
+  <table class="items">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th class="text-right">Qty</th>
+        <th class="text-right">Rate</th>
+        <th class="text-right">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each items}}
+      <tr>
+        <td>{{this.description}}</td>
+        <td class="text-right">{{this.quantity}}</td>
+        <td class="text-right">${{this.rate}}</td>
+        <td class="text-right">${{this.amount}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <div class="summary">
+    <div class="summary-row">
+      <span>Subtotal:</span>
+      <span>${{subtotal}}</span>
+    </div>
+    <div class="summary-row">
+      <span>Tax ({{taxRate}}%):</span>
+      <span>${{taxAmount}}</span>
+    </div>
+    <div class="summary-row total">
+      <span>Total Due:</span>
+      <span>${{total}}</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Thank you for your business!</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  documint:
+    build: .
+    container_name: documint-pdf-api
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=3000

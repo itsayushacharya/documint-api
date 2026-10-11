@@ -1,0 +1,14 @@
+{
+  "name": "documint-pdf-service",
+  "version": "1.0.0",
+  "description": "Developer-first headless invoicing & PDF generation microservice API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "handlebars": "^4.7.8",
+    "puppeteer": "^22.10.0"
+  }
+}
